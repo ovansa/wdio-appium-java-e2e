@@ -21,8 +21,8 @@ public class SignUpPageTest {
     public void setupClass() throws MalformedURLException {
         final UiAutomator2Options options = new UiAutomator2Options();
         options.setApp(Path.of(System.getProperty("user.dir"), "src/test/resources/wdio.apk").toString());
-        options.setDeviceName("Pixel7");
-        options.setAvd("Pixel7");
+//        options.setDeviceName("Pixel7");
+        options.setPlatformName("Android").setPlatformVersion("15");
 //        options.setAppWaitActivity("com.wdioemoapp.MainActivity");
         options.setCapability("appium:settings[ignoreUnimportantViews]", true);
 
