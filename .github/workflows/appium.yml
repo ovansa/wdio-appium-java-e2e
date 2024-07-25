@@ -22,18 +22,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
       - run: |
-          npm install -g appium@next
-          appium -v
-          appium &>/dev/null &
-      - name: Create AVD
-        run: |
-          avdmanager create avd -n test -k "system-images;android-${{ matrix.api-level }};${{ matrix.target }};${{ matrix.arch }}"
-      - name: Start emulator
-        run: |
+          sdkmanager --install "system-images;android-${{ matrix.api-level }};${{ matrix.target }};${{ matrix.arch }}"
+      - run: |
+          echo "no" | avdmanager create avd -n test -k "system-images;android-${{ matrix.api-level }};${{ matrix.target }};${{ matrix.arch }}"
+      - run: |
           $ANDROID_HOME/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &
           adb wait-for-device
           adb shell getprop sys.boot_completed
           adb shell input keyevent 82
+      - name: Install Appium
+        run: |
+          npm install -g appium@next
+          appium -v
+          appium &>/dev/null &
       - name: Run Appium Tests
         run: mvn clean test -Pandroid
