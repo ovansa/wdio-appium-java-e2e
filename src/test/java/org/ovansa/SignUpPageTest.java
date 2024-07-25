@@ -22,7 +22,7 @@ public class SignUpPageTest {
         final UiAutomator2Options options = new UiAutomator2Options();
         options.setApp(Path.of(System.getProperty("user.dir"), "src/test/resources/wdio.apk").toString());
 //        options.setDeviceName("Pixel7");
-        options.setPlatformName("Android").setPlatformVersion("15");
+        options.setPlatformName("Android").setPlatformVersion("13.0");
 //        options.setAppWaitActivity("com.wdioemoapp.MainActivity");
         options.setCapability("appium:settings[ignoreUnimportantViews]", true);
 
