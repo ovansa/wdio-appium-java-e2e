@@ -35,4 +35,6 @@ jobs:
           target: ${{ matrix.target }}
           arch: arm64-v8a
           profile: Nexus 6
+          disable-hardware-acceleration: true # Disable hardware acceleration
+          emulator-options: -no-window -no-snapshot -no-boot-anim
           script: mvn clean test -Pandroid
